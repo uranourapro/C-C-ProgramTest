@@ -1,17 +1,8 @@
-﻿#include"KentaFile.h"
+﻿#include"KentaSample.h"
 
 int main() {
 
-	while (true) {
-		Test2("書き込み完了");
-		getchar();
-
-		Test1();
-		getchar();
-
-		TestFileDelete();
-		getchar();
-	}
+	Sample3();
 
 	system("pause");
 	return 0;
