@@ -1,5 +1,6 @@
 ﻿#include"KentaSample.h"
-#include"KentaFile.h"
+#include"FileControl.h"
+#include"FileTest.h"
 
 
 void Sample1() {
@@ -21,6 +22,6 @@ void Sample3() {
 
 	while (true) {
 		txt1.AddWrite();
-		txt1.Read();
+		txt1.Print();
 	}
 }

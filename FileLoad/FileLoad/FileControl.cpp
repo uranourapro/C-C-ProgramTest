@@ -1,11 +1,8 @@
-﻿#include"KentaFile.h"
+﻿#include"FileControl.h"
 #include<fstream>
 #include<string>
 
-
 namespace {
-
-	#define FN "test.txt"//namespace Testで使用するテキストファイルの名前
 
 	//文字列の後ろから文字を抜き出す関数
 	//posが何番目か lenが抜き出す長さ
@@ -13,62 +10,7 @@ namespace {
 		const int length = str.length();
 		return str.substr(length - pos, len);
 	}
-}
 
-//-----------------------------------------------------------------------------------
-
-namespace Test {
-
-	bool Read() {//インプット入力読み込み
-		std::ifstream ifs(FN);
-		std::string str;
-
-		if (ifs.fail()) {
-			std::cout << "ファイルの読み込みに失敗しました" << std::endl;
-			return false;
-		}
-
-		while (std::getline(ifs, str)) {
-			std::cout << str << std::endl;
-		}
-
-		return true;
-
-	}
-
-	bool Write(std::string str) {//アウトプット出力書き込み
-		std::ofstream ofs(FN, std::ios::app);
-
-		ofs << str << "\n";//書き込み
-
-		ofs.close();//終了
-
-		return true;
-
-	}
-
-	void Write2() {//アウトプット
-		std::ofstream ofs(FN, std::ios::app);
-		std::string str;
-
-		if (ofs.fail()) {
-			std::cout << "ファイルが存在しなかったため、作成しました" << std::endl;
-		}
-
-		std::cout << "ファイルに書き込みたい文字を入力してください" << std::endl;
-
-		std::cin >> str;//ユーザー入力
-
-		ofs << str << "\n";//書き込み
-
-		ofs.close();
-
-	}
-
-	void Delete() {
-		std::ofstream ofs(FN, std::ios::trunc);
-
-	}
 }
 
 
@@ -83,7 +25,7 @@ namespace Test {
 
 FileControl::FileControl(std::string ext) {
 
-	while (!SetFileName(ext, 5)) {
+	while (!SetInputFileName(ext, 5)) {
 		std::cout << "警告：有効なファイル名を入力してください\n" << std::endl;
 	}
 
@@ -91,7 +33,7 @@ FileControl::FileControl(std::string ext) {
 	OpenTest();
 
 	//テキストの内容を表示する
-	Read();
+	Print();
 
 }
 
@@ -100,7 +42,9 @@ FileControl::FileControl(std::string ext) {
 //	ファイルの中身を全て表示する
 //	※ファイル読み込みに失敗した場合、再設定をしてくれる
 
-void FileControl::Read() {
+void FileControl::Print() {
+	//Read・Load→ファイルを読み込んでバッファに保存する
+	//			情報を保存するときにこの名前は使う　
 
 	std::ifstream ifs(text_name);
 
@@ -109,7 +53,7 @@ void FileControl::Read() {
 			"登録されたファイルが削除されてしまった恐れがあります\n\n" <<
 			"再設定を行います\n"<<std::endl;
 
-		while (!SetFileName(100));//再設定
+		while (!SetInputFileName(100));//再設定
 
 		std::cout << "設定を終了します\n結果：成功\n" << std::endl;
 	}
@@ -151,9 +95,9 @@ void FileControl::AddWrite() {
 //	[ファイル名の再設定]
 //	引数①：入力(設定)可能回数（デフォルト引数 = 1）
 
-bool FileControl::SetFileName(int challenge_num) {
+bool FileControl::SetInputFileName(int challenge_num) {
 
-	return SetFileName(file_extension_name, challenge_num);
+	return SetInputFileName(file_extension_name, challenge_num);
 
 }
 
@@ -162,7 +106,7 @@ bool FileControl::SetFileName(int challenge_num) {
 //	引数①：使用する拡張子
 //	引数②：入力(設定)可能回数（デフォルト引数 = 1）
 
-bool FileControl::SetFileName(std::string file_extension,int challenge_num) {
+bool FileControl::SetInputFileName(std::string file_extension,int challenge_num) {
 
 	//拡張子を設定　以降、再設定が無い限り、この拡張子のファイルを管理する
 	file_extension_name = file_extension;
@@ -215,20 +159,3 @@ void FileControl::OpenTest() {
 
 }
 
-
-/*
-	セーブ関係関数
-	ゲームのセーブのようなものを作りたい
-*/
-
-bool FileLoader::SetNewData(int data) {
-	
-
-	return false;
-
-}
-
-FileData::FileData(int data) {
-
-
-}

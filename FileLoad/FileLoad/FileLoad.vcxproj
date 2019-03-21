@@ -115,7 +115,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="KentaFile.cpp">
+    <ClCompile Include="FileControl.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FileLoader.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FileTest.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -129,7 +137,15 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="KentaFile.h">
+    <ClInclude Include="FileControl.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FileLoader.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FileTest.h">
       <SubType>
       </SubType>
     </ClInclude>
